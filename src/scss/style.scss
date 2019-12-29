@@ -1,0 +1,61 @@
+/* basic style */
+html,
+body {
+  position: relative;
+  overflow: hidden;
+}
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+  background: radial-gradient(circle at center, #222, #000);
+  perspective: 19em;
+}
+div {
+  transform-style: preserve-3d;
+}
+
+.container{
+  width: 100%;
+  height: 100%;
+  transform: rotate(18deg);
+}
+
+/* rot style */
+
+$dot-r: 1.5vmin;
+$tz: translatez(4 * $dot-r);
+$p: perspective(9em);
+$t: 4s;
+
+.rot {
+  position: absolute;
+  top: 50%;
+  left: calc(110% * var(--k));
+  &:before,
+  &:after {
+    --i: 0;
+    content: "";
+    position: absolute;
+    margin: -$dot-r;
+    padding: $dot-r;
+    background: #87a1a2;
+    border-radius: 50%;
+    animation: r $t linear calc((0.5 * var(--i) + 6 * var(--k)) *#{-$t}) infinite;
+  }
+  &::after {
+    background-color: #71b2be;
+    --i: 1;
+  }
+}
+
+@keyframes r {
+  0% {
+    transform: $p rotatex(0deg) $tz rotatex(0deg);
+  }
+  100% {
+    transform: $p rotatex(1turn) $tz rotatex(-1turn);
+  }
+}
